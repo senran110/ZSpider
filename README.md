@@ -25,10 +25,10 @@
 | 2019-07 | 百度/谷歌/有道翻译 | 暂无 | 有效 | Translate | / |
 | 2019-07 | 企名片 | 暂无 | 有效 | JsCrack\Qimingpian | / |
 | 2019-07 | 空气质量网 | 暂无 | 有效 | JsCrack\AQI | / |
-
+| 2019-08 | 七麦数据 | 初稿 | 有效 | JsCrack\QiMaiData | / |
 ## 补充一
 有朋友说我把多个项目放在一个仓库，导致他只需某个项目只能全部clone，在这里推荐一个chrome插件GitZip for github,开启插件后在需下载的文件夹后双击即可，如下图：
-![](http://pulys00v8.bkt.clouddn.com/gitzip.png)
+![](https://lxbio.oss-cn-hangzhou.aliyuncs.com/gitzip.png)
 
 ## 补充二
 简书的几篇文章不知为啥都被锁定了，感兴趣的朋友可以看我的个人博客:[https://lxb321.github.io/](https://lxb321.github.io/)
