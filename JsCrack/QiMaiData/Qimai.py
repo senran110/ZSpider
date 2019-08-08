@@ -25,19 +25,25 @@ from Qlogin import QiMainLogin, headers, COOKIEFILE
 
 class DataList:
     def __init__(self):
+        cookies_in_file = self.read_cookies()
         client = pymongo.MongoClient(host='localhost', port=27017)
+
+        self.lxb = QiMainLogin()
         self.collection = client.SPIDER.QIMAI
         # 先从文件读取cookie判断是否有效,若无效则登录
         self.session = requests.session()
-        cookies_in_file = self.read_cookies()
-        self.lxb = QiMainLogin()
 
+        self.loginError = 0
         if cookies_in_file and self.lxb.check_login(cookies_in_file):
             self.session.cookies = cookies_in_file
         else:
-            print("ReLogin")
+            print("Now ReLogin")
             cookiesjar = self.lxb.login_qimai()
-            self.session.cookies = cookiesjar
+            if cookiesjar is None:
+                print("登录失败,请检查用户名密码")
+                self.loginError = 1
+            else:
+                self.session.cookies = cookiesjar
         # GET
         self.market_url = "https://www.qimai.cn/rank/marketRank"
         self.marketList_api = "https://api.qimai.cn/rank/marketList"
@@ -50,7 +56,6 @@ class DataList:
                 # 将字典转换成RequestsCookieJar，赋值给session的cookies.
                 cookies = requests.utils.cookiejar_from_dict(pickle.load(f))
             return cookies
-
         else:
             return None
 
@@ -62,12 +67,16 @@ class DataList:
         }
         # print("3:", dict_from_cookiejar(self.session.cookies))
         resp = self.session.get(self.marketList_api, params=params, headers=self.headers)
-        # pprint(resp.json()) 看分类去掉注释
+        # pprint(resp.json()) # 看数字的意义 取消注释
 
     # https://api.qimai.cn/rank/marketRank?analysis=dTBlTyx0dQV8ZHEEdDB2CCpZeBRUdwlHUwJmSwZwVBFuB1hdU11mXHATFxZWVg8bWwBCW1VEYlFeUyQUDF0MD1MDAwkABgNwG1U%3D&market=6&category=14&country=cn&collection=topselling_free&date=2019-08-04
     def request_marketRank(self):
-        market_id = input("输入大分类>>")
-        category_id = input("输入子分类>>")
+        # 若登录失败则退出
+        if self.loginError:
+            return
+        # 6代表华为 14代表商务 看全部见request_marketList
+        market_id = input("输入大分类数字如6>>") 
+        category_id = input("输入子分类数字如14>>")
         # date = input("输入日期>>")
         #             "analysis": analysis,
         #             # "collection": "topselling_free",
@@ -96,7 +105,6 @@ class DataList:
                 maxPage = int(results.get("maxPage"))
                 print("maxPage:", maxPage)
 
-            # print(results)
             if results.get("code") == 10000:
                 rankInfos = results.get("rankInfo")
                 for rankInfo in rankInfos:
@@ -105,10 +113,9 @@ class DataList:
                     item['publisher'] = rankInfo.get('appInfo').get('publisher')
                     item['app_comment_score'] = rankInfo.get('appInfo').get('app_comment_score')
                     item['app_comment_count'] = rankInfo.get('appInfo').get('app_comment_count')
-                    # print(item)
                     self.save_to_mongo(item)
             else:
-                print(results)
+                print("error in rank:", results)
 
             page = page + 1
             if page > maxPage:

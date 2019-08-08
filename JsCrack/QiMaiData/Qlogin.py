@@ -114,7 +114,7 @@ class QiMainLogin:
 
             return self.session.cookies
         else:
-            print(resp.json())
+            print("login error:", resp.json())
 
     def get_my_analysis(self, e_url, url, params=None):
         # 生成e
