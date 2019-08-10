@@ -48,6 +48,7 @@ woff_string = '''
 woffs = [i for i in woff_string if i != '\n' and i != ' ']
 
 standard_font_obj = "./font/53cfe63b.woff"
+
 standard_font = TTFont(standard_font_obj)
 
 uni_tuple = standard_font.getGlyphOrder()[2:]

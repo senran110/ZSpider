@@ -4,13 +4,13 @@
 """
 import requests
 
-# 代理服务器
-proxyHost = "http-dyn.abuyun.com"
-proxyPort = "9020"
+# 阿布云代理服务器
+proxyHost = "http-pro.abuyun.com"
+proxyPort = "9010"
 
 # 代理隧道验证信息
-proxyUser = ""
-proxyPass = ""
+proxyUser = "H093W9GW5X64434P"
+proxyPass = "6619363DE4998078"
 
 proxyMeta = "http://%(user)s:%(pass)s@%(host)s:%(port)s" % {
     "host": proxyHost,
@@ -25,10 +25,13 @@ proxies = {
 }
 
 # 要访问的目标页面
-targetUrl = "http://test.abuyun.com"
+# targetUrl = "http://test.abuyun.com"
 # 待测试目标网页
 # targetUrl = "http://icanhazip.com"
-
-# resp = requests.get(targetUrl, proxies=proxies)
 #
+# resp = requests.get(targetUrl, proxies=proxies)
 # print(resp.text)
+# resp = requests.get(targetUrl,proxies=proxies)
+# print(resp.text)
+
+

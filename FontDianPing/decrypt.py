@@ -7,6 +7,7 @@ import re
 from constants import PATTERN_SVG_TEXT
 
 
+# ============ WOFF ============
 def _decrypt_woff_tag(unitext, dictionary):
     """
     解析自定义字体
@@ -17,9 +18,11 @@ def _decrypt_woff_tag(unitext, dictionary):
     for key, value in dictionary.items():
         # ef44 in unief44
         if unitext in key:
+
             return value
 
 
+# ============ SVG ============
 def _decrypt_text_tag(svg_content, font_size, x_offset, y_offset):
     """
     :param svg_content:

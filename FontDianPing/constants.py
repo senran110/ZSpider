@@ -2,10 +2,6 @@
 @file:constants.py
 @time:2019/6/4-9:12
 """
-# 芝麻代理测试
-PROXY_URL = ""
-# 阿布云代理
-
 # 列表页请求头
 HEADERS = {
     "Referer": "http://www.dianping.com/",
@@ -26,7 +22,6 @@ CSS_HEADERS = {
     'Upgrade-Insecure-Requests': '1',
 }
 
-UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.80 Safari/537.36"
 # 随机延时
 COMMENTS_SLEEP = (20, 30)
 
@@ -37,7 +32,8 @@ PATTERN_SPAN_CLASS = r'\[class\^="(.+?)"\]{width:(.+?)px;.+?url\((.+?)\)'
 # 从正文提取CSS
 PATTERN_SVG_CSS = r'href="([^"]+svgtextcss[^"]+)"'
 PATTERN_SVG_TEXT = r'y=.*?(\d+)">(.*?)</text>'
-
+# 提取自定义字体链接
+PATTERN_FONT_NAME = r"@font-face{font-family: \"(.*?)\";.*?format\(\"embedded-opentype\"\),url\(\"(.*?\.woff)\"\)"
 # 请求协议
 PAGE_PREFIX = "https:"
 # 请求资源前缀
@@ -46,9 +42,9 @@ CSS_URL_PREFIX = 'http:'
 START_URL = "https://www.dianping.com/hangzhou/ch10/g101"
 # 加密的标签
 DECRYPT_TAGS = ['d', 'e', 'svgmtsi', 'span']
-
 # 加密文本中无效的标签
 IGNORED_SPAN_CLASS = ['info-name', ]
+
 # 允许网络请求的HTTP方法
 HTTP_METHODS = ['get', 'head', 'post', 'put', 'options']
 
@@ -70,7 +66,3 @@ LOG_FORMAT = {
     'ERROR': '%(asctime)s %(name)s(%(levelname)s) - %(message)s',
     'CRITICAL': '%(asctime)s %(name)s(%(levelname)s) - %(message)s',
 }
-
-# Mongodb配置
-# MONGO_CLIENT = 'mongodb://localhost:27017'
-
