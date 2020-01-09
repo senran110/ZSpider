@@ -16,6 +16,7 @@ from urllib.parse import urlparse, parse_qsl, urlencode
 from fake_useragent import UserAgent
 from scrapy import Selector
 
+from Digits import convertChineseDigitsToArabic
 from httpHelp import request
 
 mutex = threading.Lock()
@@ -105,7 +106,7 @@ class HongShu:
 
             element_dict = self.deal_the_js(CryptoJS)
             self.replace_text(element_dict, req_html)
-            print("-----" * 50)
+            print("---" * 20)
 
     def deal_the_js(self, Jstext):
         """
@@ -154,7 +155,14 @@ class HongShu:
         """
         if not os.path.exists(self.folder):
             os.mkdir(self.folder)
-
+        try:
+            cnum = re.search(r"第(.*?)章", title).group(1)
+            print(f"cnum:{cnum}")
+            dnum = convertChineseDigitsToArabic(cnum)
+            print(f"dnum:{dnum}")
+            title = re.sub(r"第(.*?)章", str(dnum), title)
+        except Exception as err:
+            print(f"非章节页...,{err}")
         with codecs.open("{}/{}.txt".format(self.folder, title), "w", encoding="utf8") as f:
             f.write(content)
 
