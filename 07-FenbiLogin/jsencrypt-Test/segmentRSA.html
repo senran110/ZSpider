@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <title>JavaScript RSA Encryption</title>
+        <meta charset="UTF-8">
+        <script src="bin/jquery-3.4.1.min.js"></script>
+        <script src="bin/jsencrypt.min.js"></script>
+
+		<script type="text/javascript">
+            $(function() {
+                $('#testme').click(function() {
+                    // 加密前的原文
+                    console.log('这是原文' + $('#input').val())
+                    // 进行RSA加密
+                    var encrypt = new JSEncrypt();
+                    encrypt.setPublicKey($('#pubkey').val());
+                    var encrypted = encrypt.encryptLong($('#input').val());
+                    // 加密后的密文
+                    console.log('这是加密之后的' + encrypted);
+                    $('#jiami').val(encrypted);
+                    
+                    //解密
+                    var decrypt = new JSEncrypt();
+                    decrypt.setPrivateKey($('#privkey').val());
+                    var uncrypted = decrypt.decryptLong(encrypted);
+                    console.log('这是解密后的密文' + uncrypted);
+                    $('#jiemi').val(uncrypted);
+                });
+            });
+        </script>
+    </head>
+    <body style="text-align: center;">
+        <label for="privkey">私钥</label>
+        <br/>
+        <textarea id="privkey" rows="15" cols="65">MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBALwlTWcENnk+BE0DGSxML8yVoFffu+NMfzimnOa4Skft7objdBd3tmh/xqkgnh5+TpSLDb84l+TIwYOwAlO//Nae4qbpR7IFjG2A/kkUa1MwpMFW4bMfxTNhZ0/PJsg4KaPnlCS7edgRnKujfx0aFIUtI9pTd6hjW1uWblkUn7x7AgMBAAECgYEAsoOaK1Jd9S+YmRGFgvhOqgiV+Ip6FTJxy2iamnblU9Y3aZjKf7HASuphrfsay8f/+wTs6DBkPlkU80O/EYOp+r46UIKq5KChW2ErUVaMyxO4f8l0PW2RFHFYWq54SbRa73DepPeC3o9LRinEaJ7/rk13EHiS6RAPkFr/ZyTOYdECQQD0BNI4Wg4gJqZHC1QCHOQUaF2cDWh5cadWT9FOXKdgRUrP+2W67BJP/RjNPT++/cyP3pdNc8vMCkF8IGgJ7Pk/AkEAxWIwCK3prAxupNrlUhPNT+nfG05Bs0SYIQHSiwUykXkcUZAcAveNk2g8XlhAQ4fEZG9BQ0+MlA246FV90NlRxQJAJEm7QWoTA7D7tUD4A0BsoqRKl3Re/wBp1CoWhEK/GU/0qi1GmZ+VsZN/5rWfDzYK/7Ioafo4amV0C5N+JUu6XQJANbDuxf2guYcsNbXBeWEfkSRZ5xCTeJMpGplnTx+b0Mxz8o/Tvs7d+QH6oeM5n+T3fCZzRz8FS2SsLq7KqZvjzQJADLfcfxaYd3V7e0/Op08ifDyCjpLa3rviNFss/msOR3Mzfg7J05wD3oVHut+g+RVF7+Gnia07pV5YnFVd0WA1UA==</textarea>
+        <!--<br/>-->
+        <label for="pubkey">公钥</label>
+        <!--<br/>-->
+        <textarea id="pubkey" rows="15" cols="65">MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC8JU1nBDZ5PgRNAxksTC/MlaBX37vjTH84ppzmuEpH7e6G43QXd7Zof8apIJ4efk6Uiw2/OJfkyMGDsAJTv/zWnuKm6UeyBYxtgP5JFGtTMKTBVuGzH8UzYWdPzybIOCmj55Qku3nYEZyro38dGhSFLSPaU3eoY1tblm5ZFJ+8ewIDAQAB</textarea>
+        <br/>
+        <label for="input">要加密的字符串:</label>
+        <br/>
+        <textarea id="input" name="input" type="text" rows='4' cols='70'>123456789</textarea>
+        <!--<br/>-->
+        <input id="testme" type="button" value="Test Me!!!" />
+        <br/>
+        <label for="input">加密后的字符串:</label>
+        <br/>
+        <textarea id="jiami" name="jiami" type="text" rows='4' cols='70'></textarea>
+        <br/>
+        <label for="pubkey">解密后的密文</label>
+        <br/>
+        <textarea id="jiemi" name="jiemi" type="text" rows='4' cols='70'></textarea>
+    </body>
+</html>
