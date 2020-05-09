@@ -46,11 +46,22 @@
 
 #### 粉笔网模拟登录(截至2020/3/1测试)
 1. 仓库地址：本仓库文件夹【FenbiLogin】
-2. 分析文章：[见浙里]()
+2. 分析文章：[见浙里](https://fishmoon.xyz/2019/10/05/JsCrack%20%E7%B2%89%E7%AC%94%E7%BD%91RSA%E7%99%BB%E5%BD%95/)
 
 #### 云片滑动验证码(截至2020/3/1测试)
 1. 仓库地址：本仓库文件夹【YunPian】
 2. 分析文章：[见浙里](https://fishmoon.xyz/2019/09/25/Verify%20%E9%AA%8C%E8%AF%81%E7%A0%81%E4%BA%91%E7%89%87/)
+
+#### 微博代理池(截至2020/5/10测试)
+1. 仓库地址：本仓库文件夹【WeiBoCookiePool】
+2. 使用说明：
+```
+1- 手动录入账号  python runImporter.py
+
+2- 开启Cookie池  python runCookiePool.py
+
+3- 启动爬虫 python begin.py
+```
 
 ## 交流学习
 ![wechat](https://i.loli.net/2020/05/01/Nt5PkQgoOSHI13j.jpg)
