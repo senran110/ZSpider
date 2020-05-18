@@ -4,27 +4,25 @@
 """
 import json
 import requests
-# from youdaoEncrypte import get_md5, get_ts_salt, get_sign
 from translate.youdaoEncrypte import get_md5, get_ts_salt, get_sign
-
-appVersion = "5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36"
-UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36"
-headers = {
-    "User-Agent": UA,
-    "Referer": "http://fanyi.youdao.com/",
-}
 
 
 class YouDao:
-    def __init__(self, key, appVersion):
+    def __init__(self, key, ):
         self.key = key  # 翻译关键字
         self.url = "http://fanyi.youdao.com/translate_o?smartresult=dict&smartresult=rule"
+        self.UA = "5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36"
+        self.headers = {
+            "User-Agent": self.UA,
+            "Referer": "http://fanyi.youdao.com/",
+        }
+        myappVersion = self.UA
         # 四个加密参数
-        self.bv, self.ts, self.salt, self.sign = self.generateSaltSign(appVersion)
+        self.bv, self.ts, self.salt, self.sign = self.generateSaltSign(myappVersion)
 
-    def generateSaltSign(self, appVersion):
+    def generateSaltSign(self, myappVersion):
         # navigator.appVersion 的 md5 加密
-        bv = get_md5(appVersion)
+        bv = get_md5(myappVersion)
         ts, salt = get_ts_salt()
         sign = get_sign(self.key, salt)
 
@@ -50,15 +48,16 @@ class YouDao:
 
         session = requests.session()
         # 用于获取后台设置的cookie，若无Cookie{"errorCode":50}
-        session.get(headers["Referer"])
+        session.get(self.headers["Referer"])
 
-        resp = session.post(self.url, data=data, headers=headers)
+        resp = session.post(self.url, data=data, headers=self.headers)
         info_dict = json.loads(resp.text)
 
         if 'translateResult' in info_dict:
             try:
                 result = info_dict['translateResult'][0][0]['tgt']
                 print("有道翻译 :", result)
+                return result
             except:
                 print("something error")
         else:
@@ -67,5 +66,5 @@ class YouDao:
 
 if __name__ == '__main__':
     key = input("需要翻译的单词:")
-    y = YouDao(key, appVersion)
+    y = YouDao(key)
     y.run()
