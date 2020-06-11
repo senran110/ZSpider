@@ -31,7 +31,7 @@
 3. 分析文章：[见浙里](https://fishmoon.xyz/2019/10/08/JsCrack%20%E6%B1%BD%E8%BD%A6%E4%B9%8B%E5%AE%B6%E8%BD%A6%E5%9E%8B%E9%85%8D%E7%BD%AE/)
 4. **使用说明**：直接运行`run_the_spier`文件即可，根据需求可进行扩展。
 
-#### 泰坦尼克号预测(永久有效)
+#### 泰坦尼克号预测决策树(永久有效)
 1. 仓库地址：本仓库文件夹【Titanic】
 2. 分析文章：[见浙里](https://fishmoon.xyz/2019/12/22/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-sklearn%20%E5%86%B3%E7%AD%96%E6%A0%91/)
 
