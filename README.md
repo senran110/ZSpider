@@ -63,7 +63,3 @@
 3- 启动爬虫 python begin.py
 ```
 
-## 交流学习
-![wechat](https://i.loli.net/2020/05/01/Nt5PkQgoOSHI13j.jpg)
-
-
